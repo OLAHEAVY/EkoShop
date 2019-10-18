@@ -1,0 +1,146 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<!-- #####Carousel Welcome Area Start ##### -->
+<div class="container-fluid">
+    <section id="showcase">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item carousel-image-1 active">
+                    <div class="container mt-5">
+                        <div class="carousel-caption d-none d-sm-block text-right mb-5">
+                            <h1 class="display-3 text-primary">New Collection</h1>
+                            <p class="lead"></p>
+                            <a href="#" class="btn btn-primary btn-lg">View Collection</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="carousel-item carousel-image-2">
+                    <div class="container">
+                        <div class="carousel-caption d-none d-sm-block text-right mb-5">
+                            <h1 class="display-3 text-primary">Trending</h1>
+                            <p class="lead"></p>
+                            <a href="#" class="btn btn-primary btn-lg">Go to Shop</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="carousel-item carousel-image-3">
+                    <div class="container">
+                        <div class="carousel-caption d-none d-sm-block text-right mb-5">
+                            <h1 class="display-3 text-primary">Fashion News</h1>
+                            <p class="lead"></p>
+                            <a href="#" class="btn btn-primary btn-lg">Blog</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+
+    </section>
+</div>
+<!-- ##### Carousel Welcome Area End ##### -->
+<!-- ##### Top Category Area Start ##### -->
+<div class="top_catagory_area section-padding-80 clearfix">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Single Catagory -->
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image:url(images/category1.jpg)">
+                    <div class="catagory-content">
+                        <a href="#" class="text-primary">Clothing</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Single Catagory -->
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(images/category2.jpg);">
+                    <div class="catagory-content">
+                        <a href="#" class="text-primary">Shoes</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Single Catagory -->
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(images/category3.jpg);">
+                    <div class="catagory-content">
+                        <a href="#" class="text-primary">Accessories</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Top Category Area End ##### -->
+<!-- ##### Global Sale Area Start ##### -->
+<div class="cta-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="cta-content bg-img background-overlay" style="background-image: url(images/globalsale.jpg);">
+                    <div class="h-100 d-flex align-items-center justify-content-end">
+                        <div class="cta--text">
+                            <h6>-60%</h6>
+                            <h2>Global Sale</h2>
+                            <a href="#" class="btn btn-primary btn-lg">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Global Area End ##### -->
+<!-- ##### Brands Area Start ##### -->
+<div class="brands-area d-flex align-items-center justify-content-between">
+    <!-- Brand Logo -->
+    <div class="single-brands-logo">
+        <img src="images/brand1.png" alt="">
+    </div>
+    <!-- Brand Logo -->
+    <div class="single-brands-logo">
+        <img src="images/brand2.png" alt="">
+    </div>
+    <!-- Brand Logo -->
+    <div class="single-brands-logo">
+        <img src="images/brand3.png" alt="">
+    </div>
+    <!-- Brand Logo -->
+    <div class="single-brands-logo">
+        <img src="images/brand4.png" alt="">
+    </div>
+    <!-- Brand Logo -->
+    <div class="single-brands-logo">
+        <img src="images/brand5.png" alt="">
+    </div>
+    <!-- Brand Logo -->
+    <div class="single-brands-logo">
+        <img src="images/brand6.png" alt="">
+    </div>
+</div>
+<!-- ##### Brands Area End ##### -->
+<script>
+    $('.carousel').carousel({
+        interval: 1000,
+        pause: 'hover'
+    });
+</script>

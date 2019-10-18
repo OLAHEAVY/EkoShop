@@ -1,0 +1,104 @@
+﻿@model EkoShop.Models.Coupon
+@{
+
+    var title = "Create Coupon";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container" style="margin-top:40px;">
+
+
+    <form method="post" asp-action="Upsert" enctype="multipart/form-data">
+        <div class="row px-2 mx-2 backgroundWhite border search-background">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Model.Id != 0)
+            {
+                <input type="hidden" asp-for="Id" />
+                title = "Edit Coupon";
+            }
+
+            <div class="col-12">
+                <h2 class="text-primary">@title</h2>
+            </div>
+            <br />
+            @if (Model.Id != 0)
+            {
+            <div class="col-12">
+                <img src="@Model.ImageUrl" alt="Alternate Text" class="img-fluid" />
+            </div>
+            }
+            <div class="col-8 mt-3">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Name"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="CouponType"></label>
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="CouponType" asp-items="Html.GetEnumSelectList<EkoShop.Models.Coupon.ECouponType>()" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Discount"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Discount" class="form-control" />
+                        <span asp-validation-for="Discount" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="MinimumAmount"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="MinimumAmount" class="form-control" />
+                        <span asp-validation-for="MinimumAmount" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="IsActive"></label>
+                    </div>
+                    <div class="col-8">
+                        <input type="checkbox" asp-for="IsActive" class="form-control" style="width:40px; height:25px;"/>
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="ImageUrl"></label>
+                    </div>
+                    <div class="col-8">
+                        <input type="file" name="files" id="uploadBox" multiple class="form-control" />
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-8 offset-4">
+                        @if (Model.Id != 0)
+                        {
+                            //Edit Button and Back To List Button
+                            <partial name="_EditAndBackToListButton" model="Model.Id" />
+                        }
+                        else
+                        {
+                            //Create Button and Back To List Button
+                            <partial name="_CreateAndBackToListButton" />
+                        }
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+    </form>
+</div>

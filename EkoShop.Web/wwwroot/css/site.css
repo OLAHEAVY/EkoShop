@@ -1,0 +1,477 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+/*a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}*/
+
+/* Provide sufficient contrast against white background */
+/*a {
+  color: #0366d6;
+}*/
+
+/*.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}*/
+
+/*.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}*/
+
+/* Sticky footer styles
+-------------------------------------------------- */
+/*html {
+  font-size: 14px;
+}*/
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/*.border-top {
+  border-top: 1px solid #e5e5e5;
+}*/
+/*.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}*/
+
+/*.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}*/
+
+/*button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}*/
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 300px;
+  white-space: nowrap;
+  line-height: 60px;/* Vertically center the text there */
+   margin-bottom:0 !important;
+}
+
+.search-background {
+    background: url('/images/dust_scratches.png');
+}
+
+.backgroundWhite {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    margin-top:40px;
+}
+
+.btn.btn-square {
+    border-radius: 0;
+}
+
+
+/* Navbar
+-------------------------------------------------- */
+.navbar{
+    box-shadow: 2px 2px 9px #3292a6;
+    opacity:1.0;
+    background:#fff;
+}
+
+.navbar .nav-item{
+    font-size: 18px;
+    padding-right: 20px;
+}
+
+.navbar .nav-link{
+    font-size:14px;
+    text-transform:uppercase;
+    padding-left:16px !important;
+    padding-right:16px !important;
+}
+
+.navbar .nav-item.active{
+    border-left:#444 3px solid;
+}
+
+body {
+    margin-top: 100px;
+}
+
+
+/*End Of Navbar
+-------------------------------------------------- */
+
+/*Start of Carousel
+-------------------------------------------------- */
+.carousel-item{
+    height:450px;
+}
+
+.carousel-image-1{
+    background:url('../images/carousel1.jpg');
+    background-size:cover;
+}
+.carousel-image-2 {
+    background: url('../images/carousel2.jpg');
+    background-size: cover;
+}
+.carousel-image-3 {
+    background: url('../images/carousel3.jpg');
+    background-size: cover;
+}
+/*End of Carousel
+-------------------------------------------------- */
+
+/*Start of Category Area
+-------------------------------------------------- */
+.single_catagory_area {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 240px;
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .single_catagory_area {
+        height: 180px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .single_catagory_area {
+        height: 180px;
+    }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    .single_catagory_area {
+        margin-bottom: 30px;
+    }
+}
+
+.single_catagory_area:after {
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -10;
+}
+
+.single_catagory_area .catagory-content a {
+    display: block;
+    font-size: 30px;
+    font-weight: 700;
+    color: #000000;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration:none;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .single_catagory_area .catagory-content a {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .single_catagory_area .catagory-content a {
+        font-size: 18px;
+    }
+}
+
+.single_catagory_area:hover .catagory-content a {
+    color: #0315ff;
+}
+
+.bg-img {
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.section-padding-80 {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+/*End of Category Area
+-------------------------------------------------- */
+/*Start of Global Area
+-------------------------------------------------- */
+.cta-area {
+    position: relative;
+    z-index: 1;
+}
+
+    .cta-area .cta-content {
+        width: 100%;
+        height: 550px;
+    }
+
+@media only screen and (max-width: 767px) {
+    .cta-area .cta-content {
+        height: 400px;
+    }
+}
+
+.cta-area .cta-content h6 {
+    font-size: 24px;
+    color: #dc0345;
+    margin-bottom: 10px;
+}
+
+.cta-area .cta-content h2 {
+    font-size: 60px;
+    color: #000000;
+    margin-bottom: 50px;
+}
+
+.single-product-wrapper .product-description .hover-content .essence-btn {
+    width: 100%;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .cta-area .cta-content h2 {
+        font-size: 48px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .cta-area .cta-content h2 {
+        font-size: 30px;
+    }
+}
+
+.cta-area .cta-content .cta--text {
+    padding-right: 150px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .cta-area .cta-content .cta--text {
+        padding-right: 50px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .cta-area .cta-content .cta--text {
+        padding-right: 0;
+    }
+}
+/*End of Global Area
+-------------------------------------------------- */
+
+/* :: 9.0 Brands Area CSS */
+.brands-area {
+    position: relative;
+    z-index: 1;
+    background-color: #f5f7f9;
+    padding: 100px 5%;
+}
+
+@media only screen and (max-width: 767px) {
+    .brands-area {
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        padding: 100px 5% 70px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .brands-area .single-brands-logo {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 33.33333%;
+        flex: 0 0 33.33333%;
+        width: 33.33333%;
+        max-width: 33.33333%;
+    }
+}
+
+.brands-area .single-brands-logo img {
+    max-width: 120px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .brands-area .single-brands-logo img {
+        max-width: 90px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .brands-area .single-brands-logo img {
+        max-width: 80px;
+        margin-bottom: 30px;
+    }
+}
+
+/* :: 9.0 Brands Area CSS */
+
+/* :: 11.0 Footer Area CSS */
+.footer_area {
+    position: relative;
+    z-index: 1;
+    background-color: #252525;
+    padding: 70px 0 60px;
+   
+}
+
+.footer_area .single_widget_area .footer_menu ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+    .footer_area .single_widget_area .footer_menu ul li a {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.6);
+        display: block;
+        font-weight: 400;
+        font-family: "Ubuntu", sans-serif;
+        padding: 0 10px;
+        text-transform: capitalize;
+        text-decoration:none;
+    }
+
+        .footer_area .single_widget_area .footer_menu ul li a:hover, .footer_area .single_widget_area .footer_menu ul li a:focus {
+            color: #ffffff;
+        }
+
+.footer_area .single_widget_area .footer_widget_menu {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+    .footer_area .single_widget_area .footer_widget_menu li {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        width: 50%;
+    }
+
+        .footer_area .single_widget_area .footer_widget_menu li a {
+            display: block;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            display: block;
+            font-weight: 400;
+            margin-bottom: 10px;
+            text-decoration:none;
+        }
+
+            .footer_area .single_widget_area .footer_widget_menu li a:hover, .footer_area .single_widget_area .footer_widget_menu li a:focus {
+                color: #ffffff;
+            }
+
+.footer_area .single_widget_area .footer_heading h6 {
+    color: #ffffff;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+.footer_area .single_widget_area .subscribtion_form form {
+    position: relative;
+    z-index: 1;
+    width: 270px;
+}
+
+@media only screen and (max-width: 767px) {
+    .footer_area .single_widget_area .subscribtion_form form {
+        margin-bottom: 50px;
+    }
+}
+
+.footer_area .single_widget_area .subscribtion_form form input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    height: 35px;
+    background-color: transparent;
+}
+
+    .footer_area .single_widget_area .subscribtion_form form input:focus {
+        border-bottom-color: #ffffff;
+        color: #ffffff;
+    }
+
+.footer_area .single_widget_area .subscribtion_form form button {
+    width: 30px;
+    height: 35px;
+    border: none;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: center;
+    z-index: 10;
+}
+
+.footer_area .single_widget_area .footer_social_area a {
+    color: #ffffff;
+    display: inline-block;
+    padding: 0 10px;
+    font-size: 16px;
+}
+/* :: 11.0 Footer Area CSS */
+
+/* :: Login Area CSS */
+.login-form {
+    width: 340px;
+    margin: 50px auto;
+}
+
+    .login-form form {
+        margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+
+    .login-form div .external-Auth{
+        margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+
+    .login-form h2 {
+        margin: 0 0 15px;
+    }
+
+.form-control, .btn {
+    min-height: 38px;
+    border-radius: 2px;
+}
+
+.login-form p a{
+    text-decoration:none;
+}
+
+/* :: Login Area CSS */

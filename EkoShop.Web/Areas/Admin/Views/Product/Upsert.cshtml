@@ -1,0 +1,144 @@
+﻿@model EkoShop.Models.ViewModels.ProductViewModel
+@{
+
+    var title = "Create Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <div class="container">
+        <form method="post" asp-action="Upsert" enctype="multipart/form-data">
+            <div class="row px-2 mx-2 backgroundWhite border search-background">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @if (Model.Product.Id != 0)
+                {
+                    <input type="hidden" asp-for="Product.Id" />
+                    title = "Edit Product";
+                }
+
+                <div class="col-12">
+                    <h2 class="text-primary">@title</h2>
+                    <br />
+                </div>
+                <div class="col-9">
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label asp-for="Product.Name"></label>
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="Product.Name" class="form-control" />
+                            <span asp-validation-for="Product.Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label asp-for="Product.Price"></label>
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="Product.Price" id="txtPrice" class="form-control" />
+                            <span asp-validation-for="Product.Price" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label asp-for="Product.Description"></label>
+                        </div>
+                        <div class="col-8">
+                            @Html.TextAreaFor(m => m.Product.Description, new { @cols = "100", @rows = "15", @style = "width:100%;" })
+                        </div>
+                        <span asp-validation-for="Product.Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label asp-for="Product.Picture"></label>
+                        </div>
+                        <div class="col-8">
+                            <input type="file" name="files" id="uploadBox" multiple class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label asp-for="Product.IsInStock"></label>
+                        </div>
+                        <div class="col-8">
+                            <input type="checkbox" asp-for="Product.IsInStock" class="form-control" checked style="width:40px; height:25px;" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label asp-for="Product.CategoryId">Category</label>
+                        </div>
+                        <div class="col-8">
+                            @Html.DropDownListFor(m => m.Product.CategoryId, Model.CategoryList,
+                                                    "- Please select a Category-", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label asp-for="Product.BrandId">Brand</label>
+                        </div>
+                        <div class="col-8">
+                            @Html.DropDownListFor(m => m.Product.BrandId, Model.BrandList,
+                                                    "- Please select a Brand-", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-8 offset-4">
+                            @if (Model.Product.Id != 0)
+                            {
+                                //Edit button and back to list
+                                <partial name="_EditAndBackToListButton" model="Model.Product.Id" />
+                            }
+                            else
+                            {
+                                <div class="row">
+                                    <div class="col">
+                                        <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                                    </div>
+                                    <div class="col">
+                                        <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                @if (Model.Product.Id != 0)
+                {
+                    <div class="col-3">
+                        @{
+                            var base64 = Convert.ToBase64String(Model.Product.Picture);
+                            var imgSrc = string.Format("data:image/jpg;base64,{0}", base64);
+
+                         }
+                        <img src="@imgSrc" width="250" height="300" style="border-radius:5px; border:1px solid #bbb9b9" alt="Product.Name" />
+                    </div>
+                }
+            </div>
+
+        </form>
+    </div>
+@section Scripts{
+    <script src="https://cdn.tiny.cloud/1/k991dqfmphzahru1qv6ry8jx4e6sllnqwy9ow6uhjmjlyjr0/tinymce/5/tinymce.min.js"></script>
+    <script>
+        //tiny mce
+        tinymce.init({
+        selector: 'textarea',
+        plugins: 'lists',
+        menubar: 'file edit format'
+    });
+
+        //check if the picture is empty
+        function validateInput() {
+            if (document.getElementById("uploadBox").value == "") {
+                swal("Error", "Please Select an Image", "error")
+                return false;
+            }
+            return true;
+        };
+        //set price to empty
+        $(document).ready(function () {
+            if (document.getElementById("txtPrice").value == "0") {
+                document.getElementById("txtPrice").value = '';
+            }
+        });
+    </script>
+}
