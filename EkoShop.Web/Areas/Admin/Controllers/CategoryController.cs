@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using EkoShop.DataAccess.Data.Repository.IRepository;
 using EkoShop.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EkoShop.Web.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     public class CategoryController : Controller
     {

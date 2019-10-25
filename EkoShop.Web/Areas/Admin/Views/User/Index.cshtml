@@ -1,0 +1,86 @@
+﻿@using EkoShop.Models.ViewModels
+@model IEnumerable<Task<UserViewModel>>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br/>
+<br />
+<div class="container">
+    <div class="border backgroundWhite">
+        <div class="row">
+            <div class="col-6">
+                <h2 class="text-primary">Application Users</h2>
+            </div>
+            <div class="col-6 text-right">
+                <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> &nbsp; New Employee Registration
+                </a>
+            </div>
+        </div>
+
+        <br />
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-striped border">
+                <tr class="table-secondary">
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        PhoneNumber
+                    </th>
+                    <th>
+                        Role
+                    </th>
+                    <th></th>
+
+                </tr>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(u => user.Result.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(u => user.Result.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(u => user.Result.PhoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(u => user.Result.Role)
+                        </td>
+
+                        <td>
+                            @if (user.Result.LockoutEnd == null || user.Result.LockoutEnd < DateTime.Now)
+                            {
+                                <a class="btn btn-success text-white" asp-action="Lock" style="width:50px" asp-route-id="@user.Result.UserId">
+                                    <i class="fas fa-lock-open"></i>
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-danger text-white" asp-action="UnLock" style="width:50px" asp-route-id="@user.Result.UserId">
+                                    <i class="fas fa-lock"></i>
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        }
+        else
+        {
+            <p><h3 class="text-center text-danger">No user was found</h3></p>
+        }
+    </div>
+</div>
+
+

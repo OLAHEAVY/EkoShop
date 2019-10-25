@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using EkoShop.DataAccess.Data.Repository.IRepository;
 using EkoShop.Models;
 using EkoShop.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EkoShop.Web.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     public class BrandController : Controller
     {

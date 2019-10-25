@@ -15,6 +15,10 @@ namespace EkoShop.DataAccess.Data.Repository.IRepository
 
         ICouponRepository Coupon { get; }
 
+        IUserRepository User { get; }
+
+        IBlogReposistory Blog { get; }
+
         void Save();
     }
 }

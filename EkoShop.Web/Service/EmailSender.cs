@@ -26,7 +26,7 @@ namespace EkoShop.Web.Service
             var client = new SendGridClient(sendGridKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("EkoShop@olaheavy.com", "Eko Shop"),
+                From = new EmailAddress("sunkanmiolawuwo@gmail.com", "Eko Shop"),
                 Subject = subject,
                 PlainTextContent = htmlMessage,
                 HtmlContent = htmlMessage

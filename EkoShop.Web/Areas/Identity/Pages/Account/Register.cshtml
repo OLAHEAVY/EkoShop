@@ -1,4 +1,5 @@
 ﻿@page
+@using EkoShop.Utility
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
@@ -9,80 +10,116 @@
     <div class="row">
         <div class="col-md-6 login-form">
             <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                <h4 class="text-primary">Register</h4>
+                <h4 class="text-primary" style="font-size:x-large"><i class="fas fa-user-plus"></i>&nbsp;<b>Register</b></h4>
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="Input.Name" class="text-primary"></label>
-                    </div>
-                    <div class="col-8">
-                        <input asp-for="Input.Name" class="form-control" />
+                <div class="form-group row clearfix">
+                    <div class="col-12 form_wrapper">
+                        <div class="input_field">
+                            <span><i aria-hidden="true" class="far fa-user text-primary"></i></span>
+                            <input asp-for="Input.Name" class="form-control" style="padding-left:30px" placeholder="     FullName" />
+                        </div>
+
                         <span asp-validation-for="Input.Name" class="text-danger"></span>
                     </div>
 
                 </div>
                 <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="Input.Email" class="text-primary"></label>
-                    </div>
-                    <div class="col-8">
-                        <input asp-for="Input.Email" class="form-control" />
+                    <div class="col-12 form_wrapper">
+                        <div class="input_field">
+                            <span><i aria-hidden="true" class="far fa-envelope text-primary"></i></span>
+                            <input asp-for="Input.Email" class="form-control" style="padding-left:30px" placeholder="     Email" />
+                        </div>
+
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
 
-                </div>
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="Input.PhoneNumber" class="text-primary"></label>
-                    </div>
-                    <div class="col-8">
-                        <input asp-for="Input.PhoneNumber" class="form-control" />
-                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-                    </div>
 
                 </div>
                 <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="Input.StreetAddress" class="text-primary"></label>
+                    <div class="col-12 form_wrapper">
+                        <div class="input_field">
+                            <span><i aria-hidden="true" class="fas fa-mobile-alt text-primary"></i></span>
+                            <input asp-for="Input.PhoneNumber" class="form-control" style="padding-left:30px" placeholder="     PhoneNumber" />
+                        </div>
+
+                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                     </div>
-                    <div class="col-8">
-                        <input asp-for="Input.StreetAddress" class="form-control" />
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 form_wrapper">
+                        <div class="input_field">
+                            <span><i aria-hidden="true" class="fas fa-address-card text-primary"></i></span>
+                            <input asp-for="Input.StreetAddress" class="form-control" style="padding-left:30px" placeholder="     StreetAddress" />
+                        </div>
+
                         <span asp-validation-for="Input.StreetAddress" class="text-danger"></span>
                     </div>
 
                 </div>
                 <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="Input.City" class="text-primary"></label>
-                    </div>
-                    <div class="col-8">
-                        <input asp-for="Input.City" class="form-control" />
+                    <div class="col-12 form_wrapper">
+                        <div class="input_field">
+                            <span><i aria-hidden="true" class="fas fa-city text-primary"></i></span>
+                            <input asp-for="Input.City" class="form-control" style="padding-left:30px" placeholder="     City" />
+                        </div>
+
                         <span asp-validation-for="Input.City" class="text-danger"></span>
                     </div>
 
                 </div>
                 <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="Input.Password" class="text-primary"></label>
-                    </div>
-                    <div class="col-8">
-                        <input asp-for="Input.Password" class="form-control" />
-                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    <div class="col-12 form_wrapper">
+                        <div class="input_field">
+                            <span><i aria-hidden="true" class="fas fa-city text-primary"></i></span>
+                            <input asp-for="Input.State" class="form-control" style="padding-left:30px" placeholder="     State" />
+                        </div>
+
+                        <span asp-validation-for="Input.State" class="text-danger"></span>
                     </div>
 
                 </div>
                 <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="Input.ConfirmPassword" class="text-primary"></label>
+                    <div class="col-12 form_wrapper">
+                        <div class="input_field">
+                            <span><i aria-hidden="true" class="fas fa-key text-primary"></i></span>
+                            <input asp-for="Input.Password" class="form-control" style="padding-left:30px" placeholder="     Password" />
+                        </div>
+
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
-                    <div class="col-8">
-                        <input asp-for="Input.ConfirmPassword" class="form-control" />
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 form_wrapper">
+                        <div class="input_field">
+                            <span><i aria-hidden="true" class="fas fa-key text-primary"></i></span>
+                            <input asp-for="Input.ConfirmPassword" class="form-control" style="padding-left:30px" placeholder="     ConfirmPassword" />
+                        </div>
+
                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                     </div>
 
                 </div>
-                <button type="submit" class="btn btn-primary">Register</button>
+                @if (User.IsInRole(SD.ManagerUser))
+                {
+                <div class="form-group row">
+                    <div class="col-12">
+
+                        <input type="radio" name="rdUserRole" value="@SD.ManagerUser" checked />@SD.ManagerUser
+                        &nbsp;
+                        <input type="radio" name="rdUserRole" value="@SD.StaffUser" checked />@SD.StaffUser
+                        &nbsp;
+                        <input type="radio" name="rdUserRole" value="@SD.BlogUser" checked />@SD.BlogUser
+
+                    </div>
+                </div>
+                }
+                <div class="form-group row">
+                    <div class="col-5 offset-2">
+                        <button type="submit" class="btn btn-primary form-control">Register</button>
+                    </div>
+                </div>
+
             </form>
         </div>
         <div class="col-md-4 col-md-offset-2 login-form">
@@ -90,7 +127,7 @@
                 <h4 class="text-primary">Use another service to register.</h4>
                 <hr />
                 @{
-                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                    if ((Model.ExternalLogins?.Count ?? 0) == 0 || User.IsInRole(SD.ManagerUser))
                     {
                         <div>
                             <p class="external-Auth">

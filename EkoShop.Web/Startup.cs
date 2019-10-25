@@ -16,6 +16,9 @@ using EkoShop.DataAccess.Data.Repository.IRepository;
 using EkoShop.DataAccess.Data.Repository;
 using EkoShop.Web.Service;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Authentication.Facebook;
+using EkoShop.Models;
+using EkoShop.Models.ViewModels;
 
 namespace EkoShop.Web
 {
@@ -34,10 +37,23 @@ namespace EkoShop.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<ApplicationUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders().
                  AddDefaultUI();
+            services.AddTransient<UserManager<ApplicationUser>>();
+
+            services.AddAuthentication().AddFacebook(FacebookOptions =>
+            {
+                FacebookOptions.AppId = "3937790292913779";
+                FacebookOptions.AppSecret = "4ce28027584e33f394ee83a4f8232d67";
+            });
+
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = "679080835290-6a94qsh0g276toontff5u6re0arrel2i.apps.googleusercontent.com";
+                googleOptions.ClientSecret = "9Kx5lr-wzsixQqc3gPtXpnaB";
+            });
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSession(options =>
@@ -47,8 +63,9 @@ namespace EkoShop.Web
                 options.Cookie.IsEssential = true;
             });
 
-            services.Configure<EmailOptions>(Configuration);
             services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<EmailOptions>(Configuration);
+          
 
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();

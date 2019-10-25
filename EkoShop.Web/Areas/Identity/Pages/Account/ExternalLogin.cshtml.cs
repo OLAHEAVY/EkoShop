@@ -1,39 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using EkoShop.Models;
+using EkoShop.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using MimeKit;
 
 namespace EkoShop.Web.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class ExternalLoginModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IWebHostEnvironment _env;
 
         public ExternalLoginModel(
-            SignInManager<IdentityUser> signInManager,
-            UserManager<IdentityUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            UserManager<ApplicationUser> userManager,
             ILogger<ExternalLoginModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager,
+            IWebHostEnvironment env)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
+            _env = env;
         }
 
         [BindProperty]
@@ -51,6 +62,18 @@ namespace EkoShop.Web.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+
+
+            public string Name { get; set; }
+
+            public string City { get; set; }
+
+            public string State { get; set; }
+
+            public string StreetAddress { get; set; }
+
+            public string PhoneNumber { get; set; }
+
         }
 
         public IActionResult OnGetAsync()
@@ -101,7 +124,8 @@ namespace EkoShop.Web.Areas.Identity.Pages.Account
                 {
                     Input = new InputModel
                     {
-                        Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                        Email = info.Principal.FindFirstValue(ClaimTypes.Email),
+                        Name = info.Principal.FindFirstValue(ClaimTypes.Name)
                     };
                 }
                 return Page();
@@ -121,13 +145,22 @@ namespace EkoShop.Web.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser { 
+                    UserName = Input.Email, 
+                    Email = Input.Email,
+                    Name = Input.Name,
+                    City = Input.City,
+                    State = Input.State,
+                    StreetAddress = Input.StreetAddress,
+                    PhoneNumber = Input.PhoneNumber
+                };
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
+                        await _userManager.AddToRoleAsync(user, SD.CustomerUser);
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
 
@@ -139,10 +172,40 @@ namespace EkoShop.Web.Areas.Identity.Pages.Account
                             pageHandler: null,
                             values: new { area = "Identity", userId = userId, code = code },
                             protocol: Request.Scheme);
+                        string Message = "Please confirm your account";
 
-                        await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                        var subject = "Confirm Account Registration";
 
+                        //get webroot path
+                        var webRoot = _env.WebRootPath;
+
+                        //Get TemplateFile located at wwwroot/templates/ConfirmAccount.html
+                        var pathToFile = _env.WebRootPath
+                               + Path.DirectorySeparatorChar.ToString()
+                               + "templates"
+                               + Path.DirectorySeparatorChar.ToString()
+                               + "ConfirmAccount.html";
+
+                        var builder = new BodyBuilder();
+                        using (StreamReader SourceReader = System.IO.File.OpenText(pathToFile))
+                        {
+                            builder.HtmlBody = SourceReader.ReadToEnd();
+                        }
+                        //{0} : Subject
+                        //{1}:  DateTime
+                        //{2}:  Name
+                        //{3}: Message
+                        //{4}: callbackUrl
+
+                        string messageBody = string.Format(builder.HtmlBody,
+                            subject,
+                            String.Format("{0:dddd, d MMMM yyyy}", DateTime.Now),
+                            Input.Name,
+                            Message,
+                            callbackUrl
+                            );
+
+                        await _emailSender.SendEmailAsync(Input.Email, subject, messageBody);
                         return LocalRedirect(returnUrl);
                     }
                 }

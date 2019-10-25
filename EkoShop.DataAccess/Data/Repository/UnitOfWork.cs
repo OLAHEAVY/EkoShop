@@ -17,6 +17,8 @@ namespace EkoShop.DataAccess.Data.Repository
             Brand = new BrandRepository(_db);
             Product = new ProductRepository(_db);
             Coupon = new CouponRepository(_db);
+            User = new UserRepository(_db);
+            Blog = new BlogRepository(_db);
         }
         public ICategoryRepository Category { get; private set; }
 
@@ -25,6 +27,10 @@ namespace EkoShop.DataAccess.Data.Repository
         public IProductRepository Product { get; private set; }
 
         public ICouponRepository Coupon { get; private set; }
+
+        public IUserRepository User { get; private set; }
+
+        public IBlogReposistory Blog { get; private set; }
 
         public void Dispose()
         {

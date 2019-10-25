@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using EkoShop.Utility
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -34,28 +35,40 @@
                     <li class="nav-item">
                         <a asp-area="Customer" asp-controller="Home" asp-action="Shop" class="nav-link text-primary">Shop</a>
                     </li>
+                   
                     <li class="nav-item">
                         <a asp-area="Customer" asp-controller="Home" asp-action="Blog" class="nav-link text-primary">Blog</a>
                     </li>
                     <li class="nav-item">
                         <a asp-area="Customer" asp-controller="Home" asp-action="Contact" class="nav-link text-primary">Contact</a>
                     </li>
+                    @if (User.IsInRole(SD.ManagerUser) || User.IsInRole(SD.StaffUser))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-primary" href="#" id="navbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Content Management
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropDown">
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-primary" href="#" id="navbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Content Management
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropDown">
+                                <a class="dropdown-item text-primary" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
 
-                            <a class="dropdown-item text-primary" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
+                                <a class="dropdown-item text-primary" asp-area="Admin" asp-controller="Brand" asp-action="Index">Brand</a>
 
-                            <a class="dropdown-item text-primary" asp-area="Admin" asp-controller="Brand" asp-action="Index">Brand</a>
+                                <a class="dropdown-item text-primary" asp-area="Admin" asp-controller="Product" asp-action="Index">Product</a>
+                                <a class="dropdown-item text-primary" asp-area="Admin" asp-controller="Coupon" asp-action="Index">Coupon</a>
+                                <a class="dropdown-item text-primary" asp-area="Admin" asp-controller="Blog" asp-action="Index">Blog</a>
+                                @if (User.IsInRole(SD.ManagerUser))
+                                {
+                                    <a class="dropdown-item text-primary" asp-area="Admin" asp-controller="User" asp-action="Index">User</a>
 
-                            <a class="dropdown-item text-primary" asp-area="Admin" asp-controller="Product" asp-action="Index">Product</a>
-                            <a class="dropdown-item text-primary" asp-area="Admin" asp-controller="Coupon" asp-action="Index">Coupon</a>
+                                }
 
-                        </div>
-                    </li>
+
+                            </div>
+                        </li>
+                    }
+
+
 
                     <partial name="_LoginPartial" />
                 </ul>

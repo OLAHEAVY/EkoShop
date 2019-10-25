@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using EkoShop.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,5 +22,9 @@ namespace EkoShop.DataAccess.Data
         public DbSet<Product> Product { get; set; }
 
         public DbSet<Coupon> Coupon { get; set; }
+
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+
+        public DbSet<Post> Post { get; set; }
     }
 }

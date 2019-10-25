@@ -36,6 +36,7 @@ namespace EkoShop.DataAccess.Data.Repository
             objFromDb.Description = product.Description;
             objFromDb.Price = product.Price;
             objFromDb.IsInStock = product.IsInStock;
+            objFromDb.Picture = product.Picture;
            
 
             _db.SaveChanges();

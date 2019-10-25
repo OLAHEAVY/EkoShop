@@ -10,19 +10,25 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using MimeKit;
+using EkoShop.Models;
 
 namespace EkoShop.Web.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class ForgotPasswordModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
+        private readonly IWebHostEnvironment _env;
 
-        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<ApplicationUser> userManager, IEmailSender emailSender, IWebHostEnvironment env)
         {
             _userManager = userManager;
             _emailSender = emailSender;
+            _env = env;
         }
 
         [BindProperty]
@@ -56,11 +62,41 @@ namespace EkoShop.Web.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                string Message = "Please reset your password";
 
+                var subject = "Reset Password Link";
+
+                //get webroot path
+                var webRoot = _env.WebRootPath;
+
+                //Get TemplateFile located at wwwroot/templates/ConfirmAccount.html
+                var pathToFile = _env.WebRootPath
+                       + Path.DirectorySeparatorChar.ToString()
+                       + "templates"
+                       + Path.DirectorySeparatorChar.ToString()
+                       + "ForgotPassword.html";
+
+                var builder = new BodyBuilder();
+                using (StreamReader SourceReader = System.IO.File.OpenText(pathToFile))
+                {
+                    builder.HtmlBody = SourceReader.ReadToEnd();
+                }
+                //{0} : Subject
+                //{1}:  DateTime
+                //{2}: Name
+                //{3}:  Message
+                //{4}:  callbackUrl
+
+                string messageBody = string.Format(builder.HtmlBody,
+                    subject,
+                    String.Format("{0:dddd, d MMMM yyyy}", DateTime.Now),
+                    user.Name,
+                    Message,
+                    callbackUrl
+                    );
+
+
+                await _emailSender.SendEmailAsync(Input.Email, subject, messageBody);
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
 

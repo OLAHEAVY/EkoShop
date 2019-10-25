@@ -1,4 +1,6 @@
 ﻿using EkoShop.DataAccess.Data.Repository.IRepository;
+using EkoShop.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,6 +10,7 @@ using System.Text;
 
 namespace EkoShop.DataAccess.Data.Repository
 {
+    
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         protected readonly DbContext Context;
