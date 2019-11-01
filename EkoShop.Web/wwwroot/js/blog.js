@@ -15,12 +15,15 @@ function loadDataTable() {
         "columns": [
             { "data": "title", "width": "15%" },
             { "data": "category", "width": "15%" },
-            { "data": "modifiedOn", "width": "15%" },
-            { "data": "createdOn", "width": "15%" },
+            { "data": "createdOn", "width": "15%", "type": "date", "render": function (data, type, row) { return data ? moment(data).format('DD/MM/YY') : ''; }},
+            { "data": "modifiedOn", "width": "15%", "type": "date", "render": function (data, type, row) { return data ? moment(data).format('DD/MM/YY') : ''; } },
             {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="text-center">
+                               <a href="/Admin/blog/Details/${data}" class="btn btn-success text-white" style="cursor:pointer;width:100px;">
+                                <i class='far fa-eye'></i> Details
+                              </a>
                              <a href="/Admin/blog/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer;width:100px;">
                                 <i class='far fa-edit'></i> Edit
                               </a>
